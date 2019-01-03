@@ -15,9 +15,11 @@
             </ui:fragment>
             <ui:fragment rendered="#{request.isUserInRole('MANAGER')}">
                 <li><h:link value="Manager space" outcome="/manage/index.xhtml"/></li>
+                <li><h:link value="Create Book" outcome="/manage/new-book.xhtml"/></li>
             </ui:fragment>
             <ui:fragment rendered="#{request.isUserInRole('ADMIN')}">
                 <li><h:link value="Admin space" outcome="/admin/index.xhtml"/></li>
+                <li><h:link value="Registered Users" outcome="/admin/user-list.xhtml"/></li>
             </ui:fragment>
             <ui:fragment rendered="#{empty currentUser.user}">
                 <li><h:link value="Login" outcome="/app/index.xhtml"/></li>

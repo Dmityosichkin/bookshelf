@@ -20,7 +20,11 @@
                 <f:ajax execute="@form" render="@form"/>
             </h:commandButton>
 
-            <h:dataTable value="#{bookBean.books}" var="book">
+            <h:outputLabel value="Not found"
+                           rendered="#{empty bookBean.books}"/>
+            <h:dataTable value="#{bookBean.books}" var="book"
+                         rendered="#{not empty bookBean.books}">
+
                 <h:column>
                     <f:facet name="header">Id</f:facet>
                     #{book.id}
