@@ -33,6 +33,12 @@
                     <f:facet name="header">Title</f:facet>
                     #{book.title}
                 </h:column>
+                <h:column>
+                    <f:facet name="header">Title</f:facet>
+                    <h:outputLink value="book.xhtml">open
+                    <f:param name="id" value="#{book.id}"/>
+                    </h:outputLink>
+                </h:column>
             </h:dataTable>
 
         </h:form>
