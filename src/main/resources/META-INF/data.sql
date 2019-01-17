@@ -6,3 +6,5 @@ insert into books (id, title, isbn, author, year) values (-1, 'Book 1', '123456'
 insert into books (id, title, isbn, author, year) values (-2, 'Book 2', '112233', 'Petr Ivanov', 1997)
 insert into books (id, title, isbn, author, year) values (-3, 'Book 3', '220099', 'John Smith', 1998)
 insert into books (id, title, isbn, author, year) values (-4, 'Book 4', '999999', 'Mike Svarovsky', 2005)
+
+insert into reservations (id, user_id, book_id, status, created) values (-1,-1, -1, 'TAKEN','2019-01-17')

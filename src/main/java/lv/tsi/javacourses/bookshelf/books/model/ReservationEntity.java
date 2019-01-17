@@ -20,6 +20,7 @@ public class ReservationEntity implements Serializable {
     @ManyToOne
     private UserEntity user;
     @Column
+    @Enumerated (EnumType.STRING)
     private ReservationStatus status;
     @Column
     private LocalDateTime created;
