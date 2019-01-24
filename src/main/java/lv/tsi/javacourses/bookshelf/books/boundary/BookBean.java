@@ -11,6 +11,7 @@ import javax.inject.Named;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.io.Serializable;
 
 @ViewScoped
@@ -29,7 +30,7 @@ public class BookBean implements Serializable {
         book = em.find(BookEntity.class, id);
 
     }
-
+@Transactional
     public void reserve(Long id) {
         System.out.println("Trying to reserve book " + id
                 + " for user " + currentUser.getUser().getId());

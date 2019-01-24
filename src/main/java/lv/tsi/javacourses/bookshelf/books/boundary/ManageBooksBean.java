@@ -1,14 +1,15 @@
 package lv.tsi.javacourses.bookshelf.books.boundary;
 
-import lv.tsi.javacourses.bookshelf.auth.boundary.CurrentUser;
 import lv.tsi.javacourses.bookshelf.books.model.BookEntity;
 import lv.tsi.javacourses.bookshelf.books.model.ReservationEntity;
+import lv.tsi.javacourses.bookshelf.books.model.ReservationStatus;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,66 +17,57 @@ import java.util.Optional;
 
 @Named
 @ViewScoped
-public class MyBooksBean implements Serializable {
+public class ManageBooksBean implements Serializable {
     @PersistenceContext
     private EntityManager em;
-    @Inject
-    private CurrentUser currentUser;
     private List<ReservationEntity> availableResult;
-    private List<ReservationEntity> inQueueResult;
     private List<ReservationEntity> takenResult;
-    private List<BookEntity> historyResult;
 
     public void prepare() {
         availableResult = new ArrayList<>();
-        inQueueResult = new ArrayList<>();
-        takenResult = new ArrayList<>();
-        List<ReservationEntity> reservations = em.createQuery(
-                "select r from Reservation r where r.user =:user and r.status = 'ACTIVE'", ReservationEntity.class)
-                .setParameter("user", currentUser.getUser())
+        List<ReservationEntity> userReservations = em.createQuery(
+                "select r from Reservation r " +
+                        "where r.status = 'ACTIVE'", ReservationEntity.class)
                 .getResultList();
-        for (ReservationEntity r : reservations) {
+
+        for (ReservationEntity r : userReservations) {
             Long reservationId = r.getId();
             Optional<ReservationEntity> firstReservation = em.createQuery(
-                    "select r from Reservation r" +
-                            " where r.book= :book and r.status <> 'CLOSED' " +
+                    "select r from Reservation r " +
+                            "where r.book = :book and r.status <> 'CLOSED' " +
                             "order by r.created", ReservationEntity.class)
                     .setParameter("book", r.getBook())
                     .getResultStream()
                     .findFirst();
             if (firstReservation.isEmpty() || firstReservation.get().getId().equals(reservationId)) {
                 availableResult.add(r);
-            } else {
-                inQueueResult.add(r);
-
             }
-
         }
-        takenResult = em.createQuery("select r from Reservation r " +
-                "where r.user = :user and r.status = 'TAKEN'", ReservationEntity.class)
-                .setParameter("user", currentUser.getUser())
-                .getResultList();
 
-        historyResult = em.createQuery("select distinct r.book from Reservation r " +
-                "where r.user = :user and r.status = 'CLOSED'", BookEntity.class)
-                .setParameter("user", currentUser.getUser())
+        takenResult = em.createQuery("select r from Reservation r " +
+                "where r.status = 'TAKEN'", ReservationEntity.class)
                 .getResultList();
+    }
+    @Transactional
+    public void giveBook(ReservationEntity reservation) {
+        ReservationEntity r = em.merge(reservation);
+        r.setStatus(ReservationStatus.TAKEN);
+        prepare();
+
+    }
+    @Transactional
+    public void takeBook(ReservationEntity reservation) {
+        ReservationEntity r = em.merge(reservation);
+        r.setStatus(ReservationStatus.CLOSED);
+        prepare();
     }
 
     public List<ReservationEntity> getAvailableBooks() {
         return availableResult;
     }
 
-    public List<ReservationEntity> getInQueueBooks() {
-        return inQueueResult;
-    }
-
     public List<ReservationEntity> getTakenBooks() {
         return takenResult;
-    }
-
-    public List<BookEntity> getHistoryBooks() {
-        return historyResult;
     }
 
 }
