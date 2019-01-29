@@ -6,7 +6,7 @@
 
 package lv.tsi.javacourses.bookshelf.auth.control;
 
-import lv.tsi.javacourses.bookshelf.auth.model.UserEntity;
+import lv.tsi.javacourses.bookshelf.books.model.UserEntity;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;

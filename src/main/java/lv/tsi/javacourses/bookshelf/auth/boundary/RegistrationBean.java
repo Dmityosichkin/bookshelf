@@ -9,7 +9,7 @@ package lv.tsi.javacourses.bookshelf.auth.boundary;
 import lv.tsi.javacourses.bookshelf.auth.control.PasswordHashAlgorithm;
 import lv.tsi.javacourses.bookshelf.auth.control.UserDAO;
 import lv.tsi.javacourses.bookshelf.auth.model.Role;
-import lv.tsi.javacourses.bookshelf.auth.model.UserEntity;
+import lv.tsi.javacourses.bookshelf.books.model.UserEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

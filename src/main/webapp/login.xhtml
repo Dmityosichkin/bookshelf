@@ -12,18 +12,18 @@
 
 <ui:composition template="/templates/main.xhtml">
     <ui:define name="content">
-        <h:form id="loginForm">
-            <h:messages/>
+        <h:form id="loginForm" styleClass="w3-container">
+            <h:messages styleClass="w3-panel w3-red w3-ul u3-border"/>
             <p>
-                <h:outputLabel value="Login name" for="loginTxt"/><br/>
-                <h:inputText id="loginTxt" value="#{loginBean.loginName}"/>
+                <h:outputLabel value="Login name" for="loginTxt"/>
+                <h:inputText id="loginTxt" value="#{loginBean.loginName}" styleClass="w3-input"/>
             </p>
             <p>
                 <h:outputLabel value="Password" for="pwdTxt"/><br/>
-                <h:inputSecret id="pwdTxt" value="#{loginBean.password}"/>
+                <h:inputSecret id="pwdTxt" value="#{loginBean.password}" styleClass="w3-input"/>
             </p>
             <p>
-                <h:commandButton id="loginBtn" action="#{loginBean.login}" value="Login">
+                <h:commandButton id="loginBtn" action="#{loginBean.login}" value="Login" styleClass="w3-button">
                     <f:ajax execute="@form" render="@form"/>
                 </h:commandButton>
             </p>

@@ -6,10 +6,13 @@
 
 <ui:composition template="/templates/main.xhtml">
     <ui:define name="content">
+
         <h:form id="new-book-form">
-            <ui:fragment rendered="#{newBookBean.created}"/>
+            <ui:fragment rendered="#{newBookBean.created}">
+                <h2>Book created successfully</h2>
+            </ui:fragment>
             <p>
-                <h:outputLabel value="Titel:"/>
+                <h:outputLabel value="Title:"/>
                 <h:inputText id="title" value="#{newBookBean.book.title}"/>
                 <h:messages for="title"/>
             </p>
@@ -25,22 +28,24 @@
             </p>
             <p>
                 <h:outputLabel value="Year:"/>
-                <h:inputText id ="year" value="#{newBookBean.book.year}"/>
+                <h:inputText id="year" value="#{newBookBean.book.year}"/>
                 <h:messages for="year"/>
             </p>
             <p>
                 <h:outputLabel value="Description:"/>
-                <h:inputText id="description" value="#{newBookBean.book.description}"/>
+                <br/>
+                <h:inputTextarea id="description"
+                                 value="#{newBookBean.book.description}"/>
                 <h:messages for="description"/>
             </p>
             <p>
                 <h:commandButton action="#{newBookBean.createBook}"
                                  value="Create">
-                <f:ajax render="@form" execute="@form"/>
+                    <f:ajax render="@form" execute="@form"/>
                 </h:commandButton>
             </p>
-
         </h:form>
+
     </ui:define>
 </ui:composition>
 

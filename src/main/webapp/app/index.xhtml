@@ -23,8 +23,8 @@
             <h:outputLabel value="Not found"
                            rendered="#{empty booksListBean.books}"/>
             <h:dataTable value="#{booksListBean.books}" var="book"
-                         rendered="#{not empty booksListBean.books}">
-
+                         rendered="#{not empty booksListBean.books}"
+                         styleClass="w3-table w3-table-all">
                 <h:column>
                     <f:facet name="header">Id</f:facet>
                     #{book.id}
@@ -34,9 +34,9 @@
                     #{book.title}
                 </h:column>
                 <h:column>
-                    <f:facet name="header">Title</f:facet>
+                    <f:facet name="header">link</f:facet>
                     <h:outputLink value="book.xhtml">open
-                    <f:param name="id" value="#{book.id}"/>
+                        <f:param name="id" value="#{book.id}"/>
                     </h:outputLink>
                 </h:column>
             </h:dataTable>

@@ -1,10 +1,7 @@
 package lv.tsi.javacourses.bookshelf.books.model;
 
-import lv.tsi.javacourses.bookshelf.auth.model.UserEntity;
-
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity(name = "Reservation")
@@ -67,5 +64,16 @@ public class ReservationEntity implements Serializable {
 
     public void setCreated(LocalDateTime created) {
         this.created = created;
+    }
+
+    @Override
+    public String toString() {
+        return "ReservationEntity{" +
+                "id=" + id +
+                ", book=" + book +
+                ", user=" + user +
+                ", status=" + status +
+                ", created=" + created +
+                '}';
     }
 }

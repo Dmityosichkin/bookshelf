@@ -4,7 +4,9 @@
  * (see LICENSE.txt for details)
  */
 
-package lv.tsi.javacourses.bookshelf.auth.model;
+package lv.tsi.javacourses.bookshelf.books.model;
+
+import lv.tsi.javacourses.bookshelf.auth.model.Role;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -53,5 +55,15 @@ public class UserEntity implements Serializable {
 
     public void setRoleName(Role roleName) {
         this.roleName = roleName;
+    }
+
+    @Override
+    public String toString() {
+        return "UserEntity{" +
+                "id=" + id +
+                ", loginName='" + loginName + '\'' +
+                ", passwordHash='" + passwordHash + '\'' +
+                ", roleName=" + roleName +
+                '}';
     }
 }

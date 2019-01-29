@@ -79,4 +79,16 @@ public class BookEntity implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    @Override
+    public String toString() {
+        return "BookEntity{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", isbn='" + isbn + '\'' +
+                ", author='" + author + '\'' +
+                ", year=" + year +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }

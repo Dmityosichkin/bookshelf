@@ -1,7 +1,6 @@
 package lv.tsi.javacourses.bookshelf.auth.boundary;
 
-import lv.tsi.javacourses.bookshelf.auth.model.UserEntity;
-import lv.tsi.javacourses.bookshelf.books.model.BookEntity;
+import lv.tsi.javacourses.bookshelf.books.model.UserEntity;
 
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
